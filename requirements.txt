@@ -3,5 +3,6 @@ gunicorn
 opencv-python-headless
 numpy
 werkzeug
-fastai
+fastai==2.7.19
+fastcore==1.5.27
 gdown
