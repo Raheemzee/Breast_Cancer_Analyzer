@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breast Cancer Analyzer</title>
+    <style>
+        body {
+            background: rgb(245, 235, 195);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        img {
+            max-width: 400px;
+            border: 2px solid #ccc;
+            margin-top: 10px;
+        }
+        .result {
+            margin: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1><strong>Breast Cancer Analyzer</strong></h1>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Single Cell Upload -->
+    <h2>Upload Mammography Image</h2>
+    <form action="/classify-mammography" method="post" enctype="multipart/form-data">
+        <input type="file" name="single_files" multiple>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if results_single %}
+        <h3>Predictions:</h3>
+        {% for result in results_single %}
+            <div class="result">
+                <h4>{{ result.filename }}</h4>
+                <p><strong>Class:</strong> {{ result.predicted_class }}</p>
+                <p><strong>Probability:</strong> {{ result.confidence }}</p>
+                <img src="{{ result.image_url }}" alt="Mammography Image">
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
